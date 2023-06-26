@@ -44,6 +44,25 @@ feelslike.innerHTML = `Feels like: ${Math.round(result.main.feels_like)}<span>°
 
 // Condition
 let conditions = document.querySelector('#conditions');
+let body = document.querySelector('body');
+if (result.weather[0].id >= 200 && result.weather[0].id <= 232) {
+  body.style.backgroundImage = `url('thunderstorm.jpg')`;
+} else if (result.weather[0].id >= 300 && result.weather[0].id <= 321) {
+  body.style.backgroundImage = `url('drizzle.jpg')`;
+} else if (result.weather[0].id >= 500 && result.weather[0].id <= 531) {
+  body.style.backgroundImage = `url('rain.jpg')`;
+} else if (result.weather[0].id >= 600 && result.weather[0].id <= 622) {
+  body.style.backgroundImage = `url('snow.jpg')`;
+} else if (result.weather[0].id >= 701 && result.weather[0].id <= 781) {
+  body.style.backgroundImage = `url('atmosphere.jpg')`;
+} else if (result.weather[0].id === 800) {
+  body.style.backgroundImage = `url('clear.jpg')`;
+} else if (result.weather[0].id >= 801 && result.weather[0].id <= 804) {
+  body.style.backgroundImage = `url('clouds.jpg')`;
+} else {
+  body.style.backgroundImage = `url('weather.jpg')`;
+}
+
 conditions.textContent = `${result.weather[0].main}`;
 
 // Variation
@@ -51,9 +70,28 @@ let variations = document.querySelector('#variations');
 variations.innerHTML = `Max: ${Math.round(result.main.temp_min)}<span>°</span> Min: ${Math.round(result.main.temp_max)}<span>°</span>`;
 
 // Sunrise and Sunset
-// let sunrise = document.querySelector('#sunrise');
-// let sunset = document.querySelector('#sunset');
-// sunrise.textContent = `${result.sys.sunrise}`
+let sunrise = document.querySelector('#sunrise');
+let sunset = document.querySelector('#sunset');
+
+let sunriseTimestamp = result.sys.sunrise * 1000; // Convert to milliseconds
+let sunsetTimestamp = result.sys.sunset * 1000; // Convert to milliseconds
+let timezoneOffset = result.timezone; // Offset in seconds
+
+// Create Date objects using the timestamps
+let sunriseDate = new Date(sunriseTimestamp);
+let sunsetDate = new Date(sunsetTimestamp);
+
+// Apply the timezone offset to the Date objects
+sunriseDate.setTime(sunriseDate.getTime() + (timezoneOffset * 1000));
+sunsetDate.setTime(sunsetDate.getTime() + (timezoneOffset * 1000));
+
+// Format the sunrise and sunset times based on the timezone
+let sunriseTime = sunriseDate.toLocaleTimeString([], { timeZone: 'UTC' });
+let sunsetTime = sunsetDate.toLocaleTimeString([], { timeZone: 'UTC' });
+
+sunrise.innerHTML = `Sunrise: ${sunriseTime}`;
+sunset.innerHTML = `Sunset: ${sunsetTime}`
+
 
 };
 
