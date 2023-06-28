@@ -2,12 +2,13 @@
 
 const api = {
   endpoint: 'https://api.openweathermap.org/data/2.5/',
-  key: '36090a72e6e694879dc0a9b07b802c2d'
+  key: 'SECRET'
 };
 
 // To access input field and addEventListener
 const input = document.querySelector('#input');
 input.addEventListener('keydown', enter);
+
 
 // if 13key/enter => search
 function enter(e) {
@@ -21,10 +22,12 @@ function enter(e) {
 async function getInfo(data) {
 const res = await fetch(`${api.endpoint}weather?q=${data}&units=metric&appID=${api.key}`);
 const result = await res.json();
+console.log(result);
 
 displayResult(result);
 
 }
+
 
 // we need to create a fucntion that will be responsible for displaying the result
 function displayResult(result) {
@@ -32,15 +35,54 @@ let city = document.querySelector('#city');
 city.textContent = `${result.name}, ${result.sys.country}`;
 
 // Date
-getOurDate();
+let timezoneOffset = result.timezone; // Offset in seconds
+getOurDate(timezoneOffset);
 
 // Temperature
+// let temperature = document.querySelector('#temperature');
+// temperature.innerHTML = `${Math.round(result.main.temp)}<span>°</span>`;
+
+//////////////////////////
 let temperature = document.querySelector('#temperature');
-temperature.innerHTML = `${Math.round(result.main.temp)}<span>°</span>`;
+let temperatureValue = Math.round(result.main.temp);
+temperature.innerHTML = `${temperatureValue}<span>°C</span>`;
 
 //  Feels Like
 let feelslike = document.querySelector('#feelslike');
-feelslike.innerHTML = `Feels like: ${Math.round(result.main.feels_like)}<span>°</span>`;
+let temperatureValueFeelsLike = Math.round(result.main.feels_like);
+feelslike.innerHTML = `Feels like: ${temperatureValueFeelsLike}<span>°C</span>`;
+
+// To access celcius/fahrenheit buttons and addEventListener
+const btnCelsius = document.querySelector('#btn-celsius');
+btnCelsius.addEventListener('click', convertToCelsius);
+const btnFahrenheit = document.querySelector('#btn-fahrenheit');
+btnFahrenheit.addEventListener('click', convertToFahrenheit);
+
+function convertToCelsius() {
+  // Temp
+  temperatureValue = (temperatureValue - 32) * (5 / 9);
+  temperature.innerHTML = `${Math.round(temperatureValue)}<span>°C</span>`;
+
+  // Feels like
+  temperatureValueFeelsLike = (temperatureValueFeelsLike - 32) * (5 / 9);
+  feelslike.innerHTML = `Feels like: ${Math.round(temperatureValueFeelsLike)}<span>°C</span>`
+}
+
+function convertToFahrenheit() {
+  // Temp
+  temperatureValue = (temperatureValue * (9 / 5)) + 32;
+  temperature.innerHTML = `${Math.round(temperatureValue)}<span>°F</span>`;
+
+  // Feels like
+  temperatureValueFeelsLike = (temperatureValueFeelsLike * (9 / 5)) + 32;
+  feelslike.innerHTML = `Feels like: ${Math.round(temperatureValueFeelsLike)}<span>°F</span>`
+}
+
+// ///////////////////////////////
+
+// //  Feels Like
+// let feelslike = document.querySelector('#feelslike');
+// feelslike.innerHTML = `Feels like: ${Math.round(result.main.feels_like)}<span>°</span>`;
 
 // Condition
 let conditions = document.querySelector('#conditions');
@@ -75,7 +117,6 @@ let sunset = document.querySelector('#sunset');
 
 let sunriseTimestamp = result.sys.sunrise * 1000; // Convert to milliseconds
 let sunsetTimestamp = result.sys.sunset * 1000; // Convert to milliseconds
-let timezoneOffset = result.timezone; // Offset in seconds
 
 // Create Date objects using the timestamps
 let sunriseDate = new Date(sunriseTimestamp);
@@ -95,12 +136,18 @@ sunset.innerHTML = `Sunset: ${sunsetTime}`
 
 };
 
-// Function to get a date
-function getOurDate() {
+
+function getOurDate(timezoneOffset) {
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   const d = new Date();
+  
+  // Apply the timezone offset to the current date
+  const utcOffset = d.getTimezoneOffset() * 60 * 1000; // Convert minutes to milliseconds
+  const localOffset = timezoneOffset * 1000; // Convert seconds to milliseconds
+  const adjustedTime = d.getTime() + utcOffset + localOffset;
+  d.setTime(adjustedTime);
 
   let dayOfWeek = days[d.getDay()];
   let dayNumber = d.getDate();
@@ -109,5 +156,4 @@ function getOurDate() {
 
   let showDate = document.querySelector('#date');
   showDate.textContent = `${dayOfWeek}, ${dayNumber} ${month} ${year}`;
-
 }

@@ -7,7 +7,7 @@
 html {
   font-size: 100%;
   font-family: 'Raleway', sans-serif;
-  color: #000;
+  color: #021730;
 }
 
 body {
@@ -40,7 +40,7 @@ body {
 #header {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
 #input {
@@ -51,6 +51,8 @@ body {
   box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
   font-family: 'Raleway', sans-serif;
   text-align: center;
+  background-color: rgba(175, 207, 240, 0.514);
+  align-self: center;
 }
 
 .container-box {
@@ -72,3 +74,21 @@ body {
   font-weight: 900;
   font-size: 3.8rem;
 } 
+
+.container-btn {
+  margin-bottom: 2.4rem;
+}
+
+button {
+  border-radius: 5px;
+  border: none;
+  background-color: #9AC5F4;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+button img {
+  width: 2rem;
+  height: 2em;
+  background-color: #9AC5F4;
+}
