@@ -43,6 +43,7 @@ getOurDate(timezoneOffset);
 // temperature.innerHTML = `${Math.round(result.main.temp)}<span>°</span>`;
 
 //////////////////////////
+// TEMP
 let temperature = document.querySelector('#temperature');
 let temperatureValue = Math.round(result.main.temp);
 temperature.innerHTML = `${temperatureValue}<span>°C</span>`;
@@ -51,6 +52,12 @@ temperature.innerHTML = `${temperatureValue}<span>°C</span>`;
 let feelslike = document.querySelector('#feelslike');
 let temperatureValueFeelsLike = Math.round(result.main.feels_like);
 feelslike.innerHTML = `Feels like: ${temperatureValueFeelsLike}<span>°C</span>`;
+
+// Min and Max temp
+let variations = document.querySelector('#variations');
+let tempMin = Math.round(result.main.temp_min);
+let tempMax = Math.round(result.main.temp_max);
+variations.innerHTML = `Max: ${tempMax}<span>°C</span> Min: ${tempMin}<span>°C</span>`;
 
 // To access celcius/fahrenheit buttons and addEventListener
 const btnCelsius = document.querySelector('#btn-celsius');
@@ -65,7 +72,12 @@ function convertToCelsius() {
 
   // Feels like
   temperatureValueFeelsLike = (temperatureValueFeelsLike - 32) * (5 / 9);
-  feelslike.innerHTML = `Feels like: ${Math.round(temperatureValueFeelsLike)}<span>°C</span>`
+  feelslike.innerHTML = `Feels like: ${Math.round(temperatureValueFeelsLike)}<span>°C</span>`;
+
+  // Min and Max temp
+  tempMin = (tempMin - 32) * (5 / 9);
+  tempMax = (tempMax - 32) * (5 / 9);
+  variations.innerHTML = `Max: ${Math.round(tempMax)}<span>°C</span> Min: ${Math.round(tempMin)}<span>°C</span> `;
 }
 
 function convertToFahrenheit() {
@@ -75,7 +87,12 @@ function convertToFahrenheit() {
 
   // Feels like
   temperatureValueFeelsLike = (temperatureValueFeelsLike * (9 / 5)) + 32;
-  feelslike.innerHTML = `Feels like: ${Math.round(temperatureValueFeelsLike)}<span>°F</span>`
+  feelslike.innerHTML = `Feels like: ${Math.round(temperatureValueFeelsLike)}<span>°F</span>`;
+
+  // Min and Max temp
+  tempMin = (tempMin * (9 / 5)) + 32;
+  tempMax = (tempMax * (9 / 5)) + 32;
+  variations.innerHTML = `Max: ${Math.round(tempMax)}<span>°F</span> Min: ${Math.round(tempMin)}<span>°F</span> `;
 }
 
 // ///////////////////////////////
@@ -108,8 +125,8 @@ if (result.weather[0].id >= 200 && result.weather[0].id <= 232) {
 conditions.textContent = `${result.weather[0].main}`;
 
 // Variation
-let variations = document.querySelector('#variations');
-variations.innerHTML = `Max: ${Math.round(result.main.temp_min)}<span>°</span> Min: ${Math.round(result.main.temp_max)}<span>°</span>`;
+// let variations = document.querySelector('#variations');
+// variations.innerHTML = `Max: ${Math.round(result.main.temp_min)}<span>°</span> Min: ${Math.round(result.main.temp_max)}<span>°</span>`;
 
 // Sunrise and Sunset
 let sunrise = document.querySelector('#sunrise');

@@ -28,7 +28,7 @@ body {
   background-color: beige;
   width: 50%;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 3.6rem;
   padding: 3rem;
   gap: 3rem;
   border-radius: 15px;
@@ -82,13 +82,13 @@ body {
 button {
   border-radius: 5px;
   border: none;
-  background-color: #9AC5F4;
+  background: none;
   padding: 0.5rem;
   margin-right: 1rem;
 }
 
 button img {
-  width: 2rem;
-  height: 2em;
-  background-color: #9AC5F4;
+  width: 2.4rem;
+  height: 2.4em;
+  background: none;
 }
