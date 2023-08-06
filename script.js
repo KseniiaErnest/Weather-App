@@ -38,11 +38,7 @@ city.textContent = `${result.name}, ${result.sys.country}`;
 let timezoneOffset = result.timezone; // Offset in seconds
 getOurDate(timezoneOffset);
 
-// Temperature
-// let temperature = document.querySelector('#temperature');
-// temperature.innerHTML = `${Math.round(result.main.temp)}<span>°</span>`;
 
-//////////////////////////
 // TEMP
 let temperature = document.querySelector('#temperature');
 let temperatureValue = Math.round(result.main.temp);
@@ -95,11 +91,6 @@ function convertToFahrenheit() {
   variations.innerHTML = `Max: ${Math.round(tempMax)}<span>°F</span> Min: ${Math.round(tempMin)}<span>°F</span> `;
 }
 
-// ///////////////////////////////
-
-// //  Feels Like
-// let feelslike = document.querySelector('#feelslike');
-// feelslike.innerHTML = `Feels like: ${Math.round(result.main.feels_like)}<span>°</span>`;
 
 // Condition
 let conditions = document.querySelector('#conditions');
@@ -124,9 +115,6 @@ if (result.weather[0].id >= 200 && result.weather[0].id <= 232) {
 
 conditions.textContent = `${result.weather[0].main}`;
 
-// Variation
-// let variations = document.querySelector('#variations');
-// variations.innerHTML = `Max: ${Math.round(result.main.temp_min)}<span>°</span> Min: ${Math.round(result.main.temp_max)}<span>°</span>`;
 
 // Sunrise and Sunset
 let sunrise = document.querySelector('#sunrise');
@@ -149,7 +137,6 @@ let sunsetTime = sunsetDate.toLocaleTimeString([], { timeZone: 'UTC' });
 
 sunrise.innerHTML = `Sunrise: ${sunriseTime}`;
 sunset.innerHTML = `Sunset: ${sunsetTime}`
-
 
 };
 

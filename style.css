@@ -16,7 +16,10 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
 
 }
 
@@ -28,8 +31,8 @@ body {
   background-color: beige;
   width: 50%;
   margin: 0 auto;
-  margin-top: 3.6rem;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 3rem;
   gap: 3rem;
   border-radius: 15px;
@@ -100,11 +103,11 @@ button img {
 /* Media Queries */
 
 @media all and (max-width: 82em) {
-  /* body {
-    height: 100%;
-  } */
+ 
   #container {
     width: 70%;
+    margin-top: 2rem;
+  margin-bottom: 2rem;
   }
 
   #input {
@@ -117,9 +120,6 @@ button img {
     font-size: 75%;
   }
 
-  #container {
-    margin-top: 9rem;
-  }
 
   button img {
     width: 3rem;
@@ -137,6 +137,5 @@ button img {
     background: none;
     backdrop-filter: blur(5px);
     width: 90%;
-    /* height: 80vh; */
   }
 }
