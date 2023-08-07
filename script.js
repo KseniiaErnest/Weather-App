@@ -61,7 +61,13 @@ btnCelsius.addEventListener('click', convertToCelsius);
 const btnFahrenheit = document.querySelector('#btn-fahrenheit');
 btnFahrenheit.addEventListener('click', convertToFahrenheit);
 
+// To keep track of current temp unit;
+let currentUnit = 'C';
+
 function convertToCelsius() {
+
+  if (currentUnit === 'F') {
+
   // Temp
   temperatureValue = (temperatureValue - 32) * (5 / 9);
   temperature.innerHTML = `${Math.round(temperatureValue)}<span>°C</span>`;
@@ -74,9 +80,23 @@ function convertToCelsius() {
   tempMin = (tempMin - 32) * (5 / 9);
   tempMax = (tempMax - 32) * (5 / 9);
   variations.innerHTML = `Max: ${Math.round(tempMax)}<span>°C</span> Min: ${Math.round(tempMin)}<span>°C</span> `;
+
+  // Disable the Celsius button
+  btnCelsius.disabled = true;
+  // Enable the Fahrenheit button
+  btnFahrenheit.disabled = false;
+
+  // Update the current unit
+  currentUnit = 'C';
+
+}
 }
 
 function convertToFahrenheit() {
+
+  if (currentUnit === 'C') {
+
+  
   // Temp
   temperatureValue = (temperatureValue * (9 / 5)) + 32;
   temperature.innerHTML = `${Math.round(temperatureValue)}<span>°F</span>`;
@@ -89,6 +109,17 @@ function convertToFahrenheit() {
   tempMin = (tempMin * (9 / 5)) + 32;
   tempMax = (tempMax * (9 / 5)) + 32;
   variations.innerHTML = `Max: ${Math.round(tempMax)}<span>°F</span> Min: ${Math.round(tempMin)}<span>°F</span> `;
+
+  // Enable the Celsius button
+  btnCelsius.disabled = false;
+
+  // Disable the Fahrenheit button
+  btnFahrenheit.disabled = true;
+
+  // Update the current unit
+  currentUnit = 'F';
+
+}
 }
 
 
