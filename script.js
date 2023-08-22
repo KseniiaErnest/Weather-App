@@ -1,8 +1,9 @@
 'use strict'
+import { apiKey } from './config.js';
 
 const api = {
   endpoint: 'https://api.openweathermap.org/data/2.5/',
-  key: 'SECRET'
+  key: apiKey
 };
 
 // To access input field and addEventListener
